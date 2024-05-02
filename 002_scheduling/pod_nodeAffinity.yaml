@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  -  image: nginx
+     name: nginx
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          # kubectl label nodes node01 size=Large
+          # kubectl label nodes node01 size-
+          - key: size
+            operator: In
+            values:
+            - Large 
+            - Medium

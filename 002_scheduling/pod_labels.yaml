@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  # kubectl get pods --selector app=APPNAME
+  # kubectl get pod --selector env=prod,tier=frontend
+  labels:
+    app: APPNAME
+spec:
+  containers:
+  -  image: nginx
+     name: nginx

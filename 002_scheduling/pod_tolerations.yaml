@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+  # kubectl taint nodes node1 app=blue:NoSchedule
+  # kubectl taint nodes node1 app=blue:NoSchedule-
+  # kubectl describe node controlplane | grep Taint  
+  tolerations:
+  - key: "app"
+    operator: "Equal"
+    value: "blue"
+    effect: "NoSchedule"
