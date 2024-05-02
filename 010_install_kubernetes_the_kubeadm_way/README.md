@@ -1,0 +1,1 @@
+# Install Kubernetes the kubeadm way
