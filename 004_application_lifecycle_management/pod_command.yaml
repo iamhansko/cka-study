@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-sleep
+spec:
+  containers:
+  - image: ubuntu
+    name: ubuntu-sleep
+    # Docker ENTRYPOINT (overwrite -> docker run --entrypoint XXX IMAGE_NAME)
+    # Docker CMD (overwrite -> docker run IMAGE_NAME XXX)
+    # Docker (ENTRYPOINT) + CMD (overwrite -> docker run --entrypoint XXX IMAGE_NAME XXX)
+    # Docker ENTRYPOINT -> K8S command:
+    # Docker CMD -> K8S args:
+    command: ["sleep"]
+    args: ["1000"]
