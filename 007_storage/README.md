@@ -27,3 +27,6 @@ Persistent Volume Claim
 
 ## Dynamic Provisioning
 - StorageClass + provisioner
+
+## Projected Volumes
+- [Reference](https://kubernetes.io/docs/concepts/storage/projected-volumes/)
