@@ -43,3 +43,59 @@
 - `kubectl config use-context CONTEXT_NAME`
 - `kubectl config --kubeconfig=/root/my-kube-config use-context research`
 - ``
+
+## RBAC
+- [Api Groups](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/)
+    - core "/api" -> /v1 -> pods, namespaces, nodes, services, pv, pvc, ...
+    - named "/apis" -> /apps -> /v1 -> /deployments, /replicasets, ...
+        
+        -> /networking.k8s.io -> /v1 -> /networkpolicies
+    - kube proxy != kubectl proxy
+
+    ```
+    kubectl api-resources --namespaced=true
+    kubectl api-resources --namespaced=false
+    ```
+
+- kube-apiserver
+    
+    --authorization-mode=
+
+        - AlwaysAllow
+        - AlwaysDeny
+        - Node
+        - RBAC
+        - ABAC
+        - Webhook
+    
+- RoleBinding / ClusterRoleBinding
+
+    - Role / ClusterRole
+
+        ```
+        kubectl auth can-i create deployments
+        kubectl auth can-i delete nodes
+        kubectl auth can-i create deployments --as dev-user
+        kubectl auth can-i create pods --as dev-user
+        kubectl auth can-i create pods --as dev-user -n test
+        ```
+
+    - Subjects
+        - User
+        - Service Account (-> Create Token)
+        
+            ```
+            kubectl exec -it kubernetes-dashboard -- ls /var/run/secrets/kubernetes.io/serviceaccount
+            ```
+
+## Security Context
+[Reference](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+
+## Network Policy
+Rule : Ingress / Egress
+Supported
+- weave-net
+- kube-router
+- calico
+- romana
+- ~~flannel~~

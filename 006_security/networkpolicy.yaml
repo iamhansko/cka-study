@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-policy
+spec:
+  podSelector:
+    matchLabels:
+      role: db
+    policyType:
+    - Ingress
+    # - Egress # If Egress Included, Egress Traffic Affected(=All Blocked or Manually Allowed), Now? All Allowed! 
+    ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            name: api-pod
+      ports:
+      - protocol: TCP
+        port: 3306
